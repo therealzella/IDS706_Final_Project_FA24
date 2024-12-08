@@ -1,6 +1,5 @@
 import pandas as pd
 
-# 需要使用的列
 USEFUL_COLUMNS = ['user_id', 'date', 'product', 'comment']
 
 class FileReader: 
