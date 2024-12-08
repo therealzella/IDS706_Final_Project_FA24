@@ -7,4 +7,4 @@ REVIEW_NUM_CAP = 300
 OPENAI_CAP = 75
 
 # File processing configuration
-USEFUL_COLUMNS = ['user_id', 'date', 'product', 'comment']
+USEFUL_COLUMNS = ["user_id", "date", "product", "comment"]

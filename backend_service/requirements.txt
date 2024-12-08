@@ -4,3 +4,5 @@ pandas
 openai
 python-multipart
 openpyxl
+ruff
+black
