@@ -1,0 +1,9 @@
+2024-12-08 23:34:41,495 - APIService - INFO - OpenAI API key loaded successfully
+2024-12-08 23:35:09,048 - APIService - INFO - Received analysis request: product=None, user_position=Not Selected, analysis_focus=Not Selected, model=gpt-3.5-turbo
+2024-12-08 23:35:09,048 - APIService - INFO - Uploaded file: file.xlsx (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+2024-12-08 23:35:09,048 - APIService - INFO - Starting file processing...
+2024-12-08 23:35:09,159 - APIService - INFO - Extracted 8 reviews from file
+2024-12-08 23:35:09,159 - APIService - INFO - Generating analysis prompt...
+2024-12-08 23:35:09,159 - APIService - INFO - Starting GPT analysis...
+2024-12-08 23:35:09,390 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-08 23:35:13,119 - APIService - INFO - Analysis completed successfully
