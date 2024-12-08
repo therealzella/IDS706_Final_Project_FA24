@@ -16,7 +16,6 @@ class FileReader:
         except Exception as e:
             return False
 
-        # 检查所有必要的列是否都存在
         for column in USEFUL_COLUMNS:
             if column not in df.columns:
                 return False
@@ -26,10 +25,8 @@ class FileReader:
     def extract_data(self):
         df = pd.read_excel(self.file)
 
-        # 删除无有效内容的评价
         df = df[(df['comment'].str.len() > 10)]
 
-        # 只保留有用的列
         df = df[USEFUL_COLUMNS]
         return df
 

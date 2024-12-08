@@ -1,25 +1,11 @@
 {
     "insightful_reviews":  "Review Analyer",
-    "tailored_for_every_role": {
-      "en": "Provide **Insightful Reviews** Tailored for Every Role, in 30 Seconds"
-    },
-    "choose_language": {
-      "en": "Choose your language"
-    },
-    "time_saving_subtitle": {
-      "en": "⚡️ Lightning-Fast Insights: Comprehensive Analysis in 30 Seconds ⚡️"
-    },
-    "time_saving_description": {
-      "en": "Leveraging cutting-edge 🧠 large language models </br>Process up to 1000 product reviews in 30 seconds </br>Save 30-60 minutes of operation time daily"
-    },
-    "tailored_insights_subtitle": {
-      "en": "👩‍🚀 Provide Customized Analysis Results Tailored to Your Needs 👩‍🚀"
-    },
-    "position_and_focus": {
-      "en": "No matter you are in <u>{}</u>, </br>or you are interested in <u>{}</u>, </br>we provide you with customized analysis"
-    },
-    "ecommerce_compatibility_subtitle": {
-      "en": "🛒 Compatible with All Major E-commerce Solutions 🛒"
-    }
+    "tailored_for_every_role": "Provide **Insightful Reviews** Tailored for Every Role, in 30 Seconds",
+    "choose_language": "Choose your language",
+    "time_saving_subtitle": "⚡️ Lightning-Fast Insights: Comprehensive Analysis in 30 Seconds ⚡️",
+    "time_saving_description": "Leveraging cutting-edge 🧠 large language models </br>Process up to 1000 product reviews in 30 seconds </br>Save 30-60 minutes of operation time daily",
+    "tailored_insights_subtitle": "👩‍🚀 Provide Customized Analysis Results Tailored to Your Needs 👩‍🚀",
+    "position_and_focus": "No matter you are in <u>{}</u>, </br>or you are interested in <u>{}</u>, </br>we provide you with customized analysis",
+    "ecommerce_compatibility_subtitle": "🛒 Compatible with All Major E-commerce Solutions 🛒"
 }
   

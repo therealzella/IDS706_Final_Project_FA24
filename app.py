@@ -12,19 +12,15 @@ st.set_page_config(page_title="Review Analyzer", layout="wide")
 if 'menu_option' not in st.session_state:
     st.session_state['menu_option'] = 'Home'
 
-language = "en"
-
 # https://github.com/victoryhb/streamlit-option-menu
 # https://icons.getbootstrap.com/
-menu_options = {
-    "en": [
-        {"label": "Home", "icon": "house"},
-        {"label": "Try", "icon": "rocket"},
-    ]
-}
+menu_options = [
+    {"label": "Home", "icon": "house"},
+    {"label": "Try", "icon": "rocket"}
+]
 
-top_menu = option_menu(None, [option["label"] for option in menu_options[language]], 
-                        icons=[option["icon"] for option in menu_options[language]], 
+top_menu = option_menu(None, [option["label"] for option in menu_options], 
+                        icons=[option["icon"] for option in menu_options], 
                         menu_icon="cast", default_index=0, orientation="horizontal"
                     )
 
@@ -37,9 +33,9 @@ def show_page_footers():
 
 
 if top_menu in ("Home"): 
-    show_home_page(language)
+    show_home_page()
 
 if top_menu in ("Try"): 
-    show_function_page(language)
+    show_function_page()
 
 show_page_footers()
