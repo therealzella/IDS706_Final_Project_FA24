@@ -2,7 +2,6 @@ import random
 import time
 import streamlit as st
 from configs import ANALYSIS_FOCUS, CONTENT_COL_CONFIG, USER_POSITION
-from style.color_theme import html_header_color_1
 from utils.image_loader import img_to_bytes, img_to_html
 
 # --------------------------------------------------------------------------------
@@ -11,6 +10,7 @@ from utils.image_loader import img_to_bytes, img_to_html
  
 def show_home_page():
     INSIGHTFUL_REVIEWS = "Review Analyzer"
+    head_color = "#166088"
 
     _, center, _ = st.columns(CONTENT_COL_CONFIG)
 
@@ -21,7 +21,7 @@ def show_home_page():
 
 
     # --- Feature 1: Time Saving ---
-    st.markdown(f"""<h2 style='text-align: center; color: {html_header_color_1};'>
+    st.markdown(f"""<h2 style='text-align: center; color: {head_color};'>
                 {"Comprehensive Review Analysis in 30 Seconds"}</h2>
                 """, unsafe_allow_html=True)
     st.markdown(f"""<h3 style='text-align: center; line-height: 2;'>
@@ -34,7 +34,7 @@ def show_home_page():
 
 
     # --- Feature 2: Tailored Insights ---
-    st.markdown(f"""<h2 style='text-align: center; color: {html_header_color_1};'>
+    st.markdown(f"""<h2 style='text-align: center; color: {head_color};'>
                 {"Provide Customized Analysis Results Tailored to Your Needs"}</h2>""", 
                 unsafe_allow_html=True)
     st.markdown(f"""<h3 style='text-align: center; line-height: 2;'>
@@ -67,7 +67,7 @@ def show_home_page():
 
 
     # --- Feature 3: Compatible with All Major EC Platforms ---
-    # st.markdown(f"""<h2 style='text-align: center; color: {html_header_color_1};'>
+    # st.markdown(f"""<h2 style='text-align: center; color: {head_color};'>
     #             {texts['ecommerce_compatibility_subtitle']}</h2>
     #             """, unsafe_allow_html=True)
     # _, center, _ = st.columns(CONTENT_COL_CONFIG)

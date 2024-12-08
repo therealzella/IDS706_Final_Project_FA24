@@ -2,7 +2,7 @@ import json
 import streamlit as st
 from services import analyze
 from configs import OPENAI_GPT3, OPENAI_GPT4, REVIEW_NUM_CAP, OPENAI_CAP, ANALYSIS_FOCUS, USER_POSITION, CONTENT_COL_CONFIG
-from services.filereader_en import FileReader
+from services.filereader import FileReader
 
 # --------------------------------------------------------------------------------
 # ---- FUNCTION PAGE -------------------------------------------------------------

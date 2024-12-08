@@ -32,7 +32,7 @@ class FileReader:
     def df_to_text(self, 
                    columns=['date', 'product', 'comment'], 
                    num_of_reviews=100, 
-                   ): # TODO: check if columns need to change here for other 3rd-party browser extension exported files
+                   ):
 
         df = self.extract_data()
 

@@ -35,56 +35,55 @@ def gpt_stream_completion(prompt, model=OPENAI_GPT3):
 # --- Prompt Generation ---
 def generate_prompt(prod_info, num_of_reviews, review_texts, user_position, analysis_focus, input_question):
     common_prompt_part1 = f"""
-    You are a senior e-commerce review analyst.
-    Your task is to analyze the most recent {num_of_reviews} product reviews for this {prod_info} product on an Ecommerce platform.\n
-    Points to follow in the analysis:
+    As a senior e-commerce review analyst, your role is to evaluate the latest {num_of_reviews} reviews for the {prod_info} product on an e-commerce platform.\n
+    Please focus on the following aspects in your analysis:
     """
 
     common_prompt_part2 = """
-    2. Your analysis should include:
-      a. Key findings, concisely listed in a summary paragraph;
-      b. Detailed analysis, discussing each key finding in depth;
-      c. Recommendations for improvement, based on your findings, to be presented at the end of the analysis.\n
-    Only provide specific customer review content as evidence for key findings when necessary, and include the date of the review.\n
-    3. Please use markdown syntax to present your analysis results.
+    2. Your analysis should cover the following points:
+      a. A concise summary paragraph highlighting the key findings;
+      b. A detailed discussion of each key finding, with in-depth analysis;
+      c. Actionable recommendations for improvement based on your findings, to be included at the conclusion.\n
+    Only refer to specific customer reviews as evidence for key findings when necessary, and ensure to include the review date.\n
+    3. Please present your analysis using markdown syntax.
     """
-    
+
     focus_to_prompt = {
-        "Product Features": "Comments related to product functional features, such as the main functions, practicality of these functions, and customer reactions to them.",
-        "Product Quality": "Comments related to product quality issues, such as durability, consistency, and customer feedback on product quality.",
-        "Design & Appearance": "Comments related to product design, such as aesthetics, color, shape, size, and customer feedback on the design.",
-        "User Experience": "Comments related to the user experience, such as ease of use, comfort, and problems encountered by customers during use.",
-        "Pricing": "Comments related to the product's price, such as whether the price is reasonable, how it compares to the product's value, and customer feedback on the price.",
-        "Customer Service & Ordering": "Comments related to customer service, such as the responsiveness of online service personnel, service quality, professionalism, and convenience of the ordering process, along with other customer feedback.",
-        "Packaging & Logistics": "Comments related to packaging and logistics issues, such as whether the product's packaging is intact, the design of the packaging, delivery speed, and customer feedback on packaging and delivery.",
+        "Product Features": "Reviews focusing on the product's key functions, the practicality of those functions, and customer reactions to them.",
+        "Product Quality": "Reviews addressing product quality aspects, such as durability, consistency, and overall customer feedback regarding its quality.",
+        "Design & Appearance": "Reviews about the product's design elements, including aesthetics, color, shape, size, and customer opinions on its visual appeal.",
+        "User Experience": "Reviews detailing the user experience, covering ease of use, comfort, and any issues faced by customers during usage.",
+        "Pricing": "Reviews discussing the product's pricing, including whether the price is justified, comparisons to the product’s value, and customer opinions on the cost.",
+        "Customer Service & Ordering": "Reviews concerning customer service, such as responsiveness, professionalism, service quality, and the ease of the ordering process, alongside other related feedback.",
+        "Packaging & Logistics": "Reviews focused on packaging and logistics, including packaging integrity, design, delivery speed, and customer feedback on these aspects.",
     }
 
     position_to_prompt = {
-        "E-commerce Operations": "an e-commerce operations manager, focusing on factors that might affect sales volumes and customer satisfaction, such as product popularity, sales strategies, ordering experience, pricing, as well as customer feedback and suggestions.",
-        "Customer Service": "a customer service manager, focusing on aspects such as response speed of online customer service personnel, service quality, professionalism, and the convenience of the ordering process, along with other customer feedback. Avoid summarizing any comments unrelated to customer service or the ordering experience.",
-        "Product R&D": "a product R&D manager, focusing on customer feedback regarding product functions and design, such as functionality, user experience, and product improvement needs, providing a comprehensive summary. Avoid summarizing any comments unrelated to the product and user experience.",
-        "Production/QC": "a production and quality control department manager, with a focus on customer feedback related to product quality, such as quality issues and defects.",
-        "Logistics/Supply Chain": "a logistics and supply chain department manager, focusing on customer feedback regarding product packaging and delivery, such as packaging and logistics issues, delivery speed, and overall logistics experience. Avoid summarizing any comments unrelated to logistics or packaging.",
+        "E-commerce Operations": "As an e-commerce operations manager, focus on factors influencing sales and customer satisfaction, such as product popularity, sales strategies, pricing, the ordering experience, and customer feedback.",
+        "Customer Service": "As a customer service manager, concentrate on aspects like the response time of online support, service quality, professionalism, and ease of the ordering process, excluding any comments unrelated to customer service or the ordering experience.",
+        "Product R&D": "As a product R&D manager, focus on customer feedback related to product functionality, design, user experience, and areas for product improvement, providing a comprehensive summary. Exclude comments unrelated to the product or user experience.",
+        "Production/QC": "As a production and quality control manager, focus on customer feedback related to product quality, including quality issues, defects, and other relevant concerns.",
+        "Logistics/Supply Chain": "As a logistics and supply chain manager, focus on customer feedback related to packaging and delivery, such as packaging integrity, delivery speed, and overall logistics experience. Exclude any comments unrelated to logistics or packaging."
     }
 
     if input_question: 
-        # generate prompt according to the specific question the user has asked
+        # Generate prompt based on the specific question the user has asked
         system_prompt = f"""
-        You are a seasoned e-commerce review analyst.
-        Your task is to analyze the most recent {num_of_reviews} product reviews for this {prod_info} product on the Taobao platform.\n
-        And through the content of customer reviews, answer the following question: {input_question}
+        You are an experienced e-commerce review analyst.
+        Your task is to evaluate the most recent {num_of_reviews} reviews for the {prod_info} product on the Taobao platform.\n
+        Using the content of customer reviews, please answer the following question: {input_question}
         """
     else: 
-        # generate prompt according to the user position and area of interest (focus analysis)
-        # if both user position and focus analysis are selected by the user, generate prompt based on focus analysis
+        # Generate prompt based on the user’s position and area of interest (focus analysis)
+        # If both position and focus analysis are selected, prioritize the focus analysis
         if analysis_focus != "Not Selected":
-            system_prompt = common_prompt_part1 \
-                + """1. The analysis should not be comprehensive but should focus on: a. Firstly, filter out customer comments related to """ + focus_to_prompt[analysis_focus] \
-                + "b. Then analyze and summarize the filtered content in detail.\n" + common_prompt_part2
+            system_prompt = common_prompt_part1 + \
+                """1. The analysis should focus specifically on: a. Filtering out customer comments related to """ + focus_to_prompt[analysis_focus] + \
+                """ b. Analyzing and summarizing the filtered content in detail.\n""" + common_prompt_part2
         elif user_position != "Not Selected":
-            system_prompt = common_prompt_part1 + "1. The analysis should not be comprehensive, please analyze solely from the perspective of " + position_to_prompt[user_position] + common_prompt_part2
+            system_prompt = common_prompt_part1 + "1. The analysis should be focused solely on the perspective of " + position_to_prompt[user_position] + common_prompt_part2
         else:
-            system_prompt = common_prompt_part1 + "1. Please categorize and analyze the customer reviews from different perspectives comprehensively, such as the main advantages and disadvantages of the product, its functions, design, user experience, pricing, packaging, customer service, quality of the product, and any other issues raised by customers." + common_prompt_part2
+            system_prompt = common_prompt_part1 + """1. Please categorize and analyze the customer reviews from various perspectives, including the main strengths and weaknesses of the product, its functionality, design, user experience, pricing, packaging, customer service, product quality, and any other customer concerns.""" + common_prompt_part2
 
     user_prompt = f"\nList of reviews:\n```{review_texts}```"
     complete_prompt = system_prompt + user_prompt
