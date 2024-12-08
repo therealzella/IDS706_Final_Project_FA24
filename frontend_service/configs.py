@@ -2,7 +2,7 @@
 CONTENT_COL_CONFIG = [1, 6, 1]
 
 # Review processing limits
-REVIEW_NUM_CAP = 300  # Maximum number of reviews to process
+REVIEW_NUM_CAP = 300
 
 # User interface configurations
 USER_POSITION = {
@@ -26,4 +26,4 @@ ANALYSIS_FOCUS = {
 }
 
 # API Configuration
-API_URL = "http://localhost:8000"  # Backend service URL
+BACKEND_URL = "http://backend:8000"  # Using Docker service name

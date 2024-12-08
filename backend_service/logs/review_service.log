@@ -1,0 +1,4 @@
+2024-12-08 04:10:25,991 - review_service - INFO - Received analysis request for product: 
+2024-12-08 04:10:26,127 - review_service - INFO - Successfully processed 8 reviews
+2024-12-08 04:10:26,127 - review_service - INFO - Generated analysis prompt
+2024-12-08 04:10:30,254 - review_service - INFO - Successfully generated analysis response

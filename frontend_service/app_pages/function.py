@@ -1,21 +1,19 @@
 import json
 import streamlit as st
 import requests
-from frontend_service.configs import (
-    REVIEW_NUM_CAP,
-    ANALYSIS_FOCUS,
-    USER_POSITION,
+from configs import (
+    REVIEW_NUM_CAP, 
+    ANALYSIS_FOCUS, 
+    USER_POSITION, 
     CONTENT_COL_CONFIG,
-    API_URL
+    BACKEND_URL
 )
 
-# Load language configuration
 try:
-    with open('frontend_service/app_pages/function_lang.json', 'r', encoding='utf-8') as f:
+    with open('app_pages/function_lang.json', 'r', encoding='utf-8') as f:
         texts = json.load(f)
 except FileNotFoundError:
-    # For when running from the frontend_service directory
-    with open('app_pages/function_lang.json', 'r', encoding='utf-8') as f:
+    with open('function_lang.json', 'r', encoding='utf-8') as f:
         texts = json.load(f)
 
 def show_function_page():
@@ -84,7 +82,7 @@ def show_function_page():
                 
                 analyze_result = st.empty()
                 with analyze_result:
-                    st.markdown(texts['step_three_analyze_result'], unsafe_allow_html=True)
+                    st.markdown(texts['step_three_analyze_result'])
                     
                     try:
                         # Make request to review service
@@ -97,9 +95,10 @@ def show_function_page():
                         }
                         
                         response = requests.post(
-                            f"{API_URL}/api/analyze",
+                            f"{BACKEND_URL}/api/analyze",
                             params=params,
-                            files=files
+                            files=files,
+                            timeout=30
                         )
                         
                         if response.status_code == 200:
@@ -108,5 +107,7 @@ def show_function_page():
                         else:
                             st.error(f"Analysis failed: {response.json()['detail']}")
                             
+                    except requests.exceptions.RequestException as e:
+                        st.error(f"Error connecting to backend service: {str(e)}")
                     except Exception as e:
                         st.error(f"Error occurred: {str(e)}")

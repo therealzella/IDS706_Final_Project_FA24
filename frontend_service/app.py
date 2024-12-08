@@ -2,9 +2,9 @@ import random
 import time
 import streamlit as st
 from streamlit_option_menu import option_menu
-from frontend_service.configs import CONTENT_COL_CONFIG
-from frontend_service.app_pages.home import show_home_page
-from frontend_service.app_pages.function import show_function_page
+from configs import CONTENT_COL_CONFIG
+from app_pages.home import show_home_page
+from app_pages.function import show_function_page
 
 # --- PAGE CONFIG AND NAV SESSION STATE---
 st.set_page_config(page_title="Review Analyzer", layout="wide")

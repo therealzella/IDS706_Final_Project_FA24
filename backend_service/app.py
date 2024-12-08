@@ -1,27 +1,23 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import logging
 from typing import Optional
 import io
 
 from analyzer.analyze import generate_prompt, gpt_stream_completion
 from utils.file_reader import FileReader
 from configs import REVIEW_NUM_CAP
+from logger_config import setup_logger
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+logger = setup_logger('review_service')
 
 app = FastAPI()
 
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8501"],
+    allow_origins=["http://localhost:8501"],  # Streamlit default port
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -32,6 +28,11 @@ class AnalysisRequest(BaseModel):
     user_position: str
     analysis_focus: str
     input_question: Optional[str] = None
+
+# Add health check endpoint
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
 
 @app.post("/api/analyze")
 async def analyze_reviews(
@@ -52,6 +53,7 @@ async def analyze_reviews(
         # Read and validate file
         file_reader = FileReader(file_obj)
         if not file_reader.check_file():
+            logger.error("Invalid file format submitted")
             raise HTTPException(status_code=400, detail="Invalid file format")
             
         # Process reviews
@@ -67,9 +69,11 @@ async def analyze_reviews(
             analysis_focus,
             input_question
         )
+        logger.info("Generated analysis prompt")
         
         # Get GPT analysis
         analysis = gpt_stream_completion(prompt)
+        logger.info("Successfully generated analysis response")
         
         return {"status": "success", "analysis": analysis}
         

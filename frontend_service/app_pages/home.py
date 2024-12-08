@@ -1,9 +1,9 @@
 import random
 import time
 import streamlit as st
-from frontend_service.configs import ANALYSIS_FOCUS, CONTENT_COL_CONFIG, USER_POSITION
-from frontend_service.style.color_theme import html_header_color_1
-from frontend_service.utils.image_loader import img_to_bytes, img_to_html
+from configs import ANALYSIS_FOCUS, CONTENT_COL_CONFIG, USER_POSITION
+from style.color_theme import html_header_color_1
+from utils.image_loader import img_to_bytes, img_to_html
 
 def show_home_page():
     INSIGHTFUL_REVIEWS = "Review Analyzer"

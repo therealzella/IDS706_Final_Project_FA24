@@ -1,0 +1,8 @@
+2024-12-08 09:45:00,876 - review_service - INFO - Received analysis request for product: 
+2024-12-08 09:45:01,008 - review_service - INFO - Successfully processed 8 reviews
+2024-12-08 09:45:01,008 - review_service - INFO - Generated analysis prompt
+2024-12-08 09:45:01,010 - review_service - ERROR - Error during analysis: Secrets file not found at /.streamlit/secrets.toml
+2024-12-08 09:47:37,571 - review_service - INFO - Received analysis request for product: 
+2024-12-08 09:47:37,738 - review_service - INFO - Successfully processed 8 reviews
+2024-12-08 09:47:37,738 - review_service - INFO - Generated analysis prompt
+2024-12-08 09:47:41,586 - review_service - INFO - Successfully generated analysis response
