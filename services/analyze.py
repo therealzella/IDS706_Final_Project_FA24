@@ -1,10 +1,8 @@
 import os
-
 import openai
 from anthropic import Anthropic, HUMAN_PROMPT, AI_PROMPT
 import streamlit as st
-
-from configs import OPENAI_GPT3, OPENAI_GPT4, REVIEW_NUM_CAP, OPENAI_CAP
+from configs import OPENAI_GPT3, OPENAI_GPT4
 
 # --- OpenAI Stream Completion ---
 openai.api_key = st.secrets["OpenAI_API_KEY"]

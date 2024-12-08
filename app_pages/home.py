@@ -2,7 +2,6 @@ import random
 import time
 import streamlit as st
 from configs import ANALYSIS_FOCUS, CONTENT_COL_CONFIG, USER_POSITION
-from utils.image_loader import img_to_bytes, img_to_html
 
 # --------------------------------------------------------------------------------
 # ---- HOME PAGE -----------------------------------------------------------------

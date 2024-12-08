@@ -34,7 +34,7 @@ def show_function_page():
 
             with review_download_instruction: 
                 st.write(texts['step_one_write1'])
-                st.image(image="assets/Compatible_Browswer_Extensions.png")
+                st.image(image="imgs/Compatible_Browswer_Extensions.png")
                 st.write(texts['step_one_write2'])
                 st.write(texts['step_one_write3'])
 
