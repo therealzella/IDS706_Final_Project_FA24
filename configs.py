@@ -9,22 +9,22 @@ REVIEW_NUM_CAP = 300
 OPENAI_CAP = 75
 
 USER_POSITION = {
-    "Not Selected", 
-    "E-commerce Operations", 
-    "Customer Service", 
-    "Product R&D", 
-    "Production/QC", 
-    "Logistics/Supply Chain"
+    "Not Selected",
+    "E-commerce Operations",
+    "Customer Service",
+    "Product R&D",
+    "Production/QC",
+    "Logistics/Supply Chain",
 }
 ANALYSIS_FOCUS = {
-    "Not Selected", 
-    "Product Features", 
-    "Product Quality", 
-    "Design & Appearance", 
-    "User Experience", 
-    "Pricing", 
-    "Customer Service & Ordering", 
-    "Packaging & Logistics"
+    "Not Selected",
+    "Product Features",
+    "Product Quality",
+    "Design & Appearance",
+    "User Experience",
+    "Pricing",
+    "Customer Service & Ordering",
+    "Packaging & Logistics",
 }
 
 # --- Container Config ---

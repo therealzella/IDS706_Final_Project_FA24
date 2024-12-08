@@ -1,8 +1,9 @@
 import pandas as pd
 
-USEFUL_COLUMNS = ['user_id', 'date', 'product', 'comment']
+USEFUL_COLUMNS = ["user_id", "date", "product", "comment"]
 
-class FileReader: 
+
+class FileReader:
     def __init__(self, file) -> None:
         self.file = file
 
@@ -24,32 +25,40 @@ class FileReader:
     def extract_data(self):
         df = pd.read_excel(self.file)
 
-        df = df[(df['comment'].str.len() > 10)]
+        df = df[(df["comment"].str.len() > 10)]
 
         df = df[USEFUL_COLUMNS]
         return df
 
-    def df_to_text(self, 
-                   columns=['date', 'product', 'comment'], 
-                   num_of_reviews=100, 
-                   ):
+    def df_to_text(
+        self,
+        columns=["date", "product", "comment"],
+        num_of_reviews=100,
+    ):
 
         df = self.extract_data()
 
         num_of_valid_reviews = len(df)
 
-        prod_reviews = df['comment'].tolist()
-        sku_selection = df['product'].tolist()
-        review_date = df['date'].tolist()
+        prod_reviews = df["comment"].tolist()
+        sku_selection = df["product"].tolist()
+        review_date = df["date"].tolist()
 
         review_texts = ""
         for i in range(min(num_of_reviews, num_of_valid_reviews)):
             review_texts += (
-                str(i + 1) + ". "
-                + "{" + review_date[i] + "} "
-                + "[" + sku_selection[i] + "] "
-                + "<" + prod_reviews[i] + "> "
+                str(i + 1)
+                + ". "
+                + "{"
+                + review_date[i]
+                + "} "
+                + "["
+                + sku_selection[i]
+                + "] "
+                + "<"
+                + prod_reviews[i]
+                + "> "
                 + "\n"
             )
-        
+
         return review_texts, num_of_valid_reviews

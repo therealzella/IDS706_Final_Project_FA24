@@ -1,7 +1,26 @@
+# Application Dependencies
+fastapi
+uvicorn
 streamlit
 streamlit_option_menu
+python-multipart
 pandas
 numpy
 openpyxl
 openai
-anthropic
+requests
+
+# Development Dependencies
+black
+isort
+ruff
+pylint
+
+# Testing Dependencies
+pytest
+pytest-cov
+locust
+
+# Documentation
+mkdocs
+mkdocs-material
