@@ -1,3 +1,5 @@
+IMAGE_NAME = review-analyzer
+
 .PHONY: install test format lint clean run docker-build docker-run all
 
 # Development Setup
@@ -30,11 +32,29 @@ run-frontend:
 	streamlit run app.py
 
 # Docker Commands
+image-show:
+	docker images
+
+container-show:
+	docker ps
+
 docker-build:
 	docker build -t review-analyzer .
 
 docker-run:
 	docker run -p 8000:8000 -p 8501:8501 review-analyzer
+
+docker-stop:
+	docker stop $$(docker ps -a -q)
+
+docker-clean:
+	@echo "==> Stopping containers..."
+	-docker stop $$(docker ps -a -q --filter ancestor=$(IMAGE_NAME))
+	@echo "==> Removing containers..."
+	-docker rm -f $$(docker ps -a -q --filter ancestor=$(IMAGE_NAME))
+	@echo "==> Removing image..."
+	-docker rmi -f $(IMAGE_NAME)
+	@echo "==> Clean complete"
 
 # Combined Commands
 all: install format lint test

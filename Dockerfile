@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --user --no-cache-dir -r requirements.txt
 
 # Copy all application code
 COPY . .
@@ -16,16 +16,21 @@ COPY . .
 # Production stage using distroless
 FROM gcr.io/distroless/python3-debian11
 
-# Copy Python environment from builder
-COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+# Copy Python packages from builder stage
+COPY --from=builder /root/.local/lib/python3.9/site-packages /usr/lib/python3.9/site-packages
+
+# Copy application code
 COPY --from=builder /app /app
 
 # Set working directory
 WORKDIR /app
 
+# Create necessary directories and copy config
+COPY --from=builder /app/.streamlit /app/.streamlit
+
 # Expose ports for both services
 EXPOSE 8000 8501
 
-# Using Python module to start both services
+# Start both services using Python modules
 ENTRYPOINT ["python", "-m"]
 CMD ["streamlit", "run", "app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
