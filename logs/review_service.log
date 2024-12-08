@@ -6,3 +6,7 @@
 2024-12-08 09:47:37,738 - review_service - INFO - Successfully processed 8 reviews
 2024-12-08 09:47:37,738 - review_service - INFO - Generated analysis prompt
 2024-12-08 09:47:41,586 - review_service - INFO - Successfully generated analysis response
+2024-12-08 09:59:42,037 - review_service - INFO - Received analysis request for product: 
+2024-12-08 09:59:42,196 - review_service - INFO - Successfully processed 8 reviews
+2024-12-08 09:59:42,196 - review_service - INFO - Generated analysis prompt
+2024-12-08 09:59:45,229 - review_service - INFO - Successfully generated analysis response

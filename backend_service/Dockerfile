@@ -1,33 +1,48 @@
-FROM python:3.9-slim
+# Build stage
+FROM python:3.9-slim AS builder
 
 WORKDIR /app
 
-# Set environment variables
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV LANG=C.UTF-8
-ENV LC_ALL=C.UTF-8
-
-# Install system dependencies
+# Install build dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends \
+    gcc \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir uvicorn
 
 # Copy source code
 COPY . .
 
+# Create non-root user
+RUN useradd -m -u 1000 appuser
+
+# Final stage using distroless
+FROM gcr.io/distroless/python3-debian11
+
+# Copy Python installation and libraries
+COPY --from=builder /usr/local/lib /usr/local/lib
+COPY --from=builder /usr/local/bin /usr/local/bin
+COPY --from=builder /app /app
+COPY --from=builder /etc/passwd /etc/passwd
+COPY --from=builder /lib /lib
+
+# Set working directory
+WORKDIR /app
+
+# Use non-root user
+USER appuser
+
 # Create volume for logs
 VOLUME /app/logs
-
-# Set Python path
-ENV PYTHONPATH=/app
 
 # Expose FastAPI port
 EXPOSE 8000
 
 # Run the application
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+ENTRYPOINT ["/usr/local/bin/uvicorn"]
+CMD ["app:app", "--host", "0.0.0.0", "--port", "8000"]
