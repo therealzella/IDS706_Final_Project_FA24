@@ -1,13 +1,10 @@
-# --- System Config ---
+# Frontend specific configurations
+CONTENT_COL_CONFIG = [1, 6, 1]
 
-# --- Model Selection ---
-OPENAI_GPT3 = "gpt-3.5-turbo"
-OPENAI_GPT4 = "gpt-4"
+# Review processing limits
+REVIEW_NUM_CAP = 300  # Maximum number of reviews to process
 
-# 单次读取评价条数上限
-REVIEW_NUM_CAP = 300
-OPENAI_CAP = 75
-
+# User interface configurations
 USER_POSITION = {
     "Not Selected", 
     "E-commerce Operations", 
@@ -16,6 +13,7 @@ USER_POSITION = {
     "Production/QC", 
     "Logistics/Supply Chain"
 }
+
 ANALYSIS_FOCUS = {
     "Not Selected", 
     "Product Features", 
@@ -27,5 +25,5 @@ ANALYSIS_FOCUS = {
     "Packaging & Logistics"
 }
 
-# --- Container Config ---
-CONTENT_COL_CONFIG = [1, 6, 1]
+# API Configuration
+API_URL = "http://localhost:8000"  # Backend service URL

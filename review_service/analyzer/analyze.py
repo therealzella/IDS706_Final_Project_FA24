@@ -1,36 +1,55 @@
 import os
+import logging
+from typing import List
+import json
+from pathlib import Path
+from openai import OpenAI
 
-import openai
-from anthropic import Anthropic, HUMAN_PROMPT, AI_PROMPT
-import streamlit as st
+# Configure logging
+logger = logging.getLogger(__name__)
 
-from configs import OPENAI_GPT3, OPENAI_GPT4, REVIEW_NUM_CAP, OPENAI_CAP
+def get_openai_api_key():
+    """Get OpenAI API key from secrets.toml"""
+    try:
+        root_dir = Path(__file__).resolve().parents[2]
+        secrets_path = root_dir / '.streamlit' / 'secrets.toml'
+        
+        if not secrets_path.exists():
+            raise FileNotFoundError(f"Secrets file not found at {secrets_path}")
+        
+        with open(secrets_path, 'r') as f:
+            for line in f:
+                if line.startswith('OpenAI_API_KEY'):
+                    key = line.split('=')[1].strip().strip('"\'')
+                    return key
+        
+        raise KeyError("OpenAI_API_KEY not found in secrets.toml")
+    except Exception as e:
+        logger.error(f"Failed to get OpenAI API key: {str(e)}")
+        raise
 
-# --- OpenAI Stream Completion ---
-openai.api_key = st.secrets["OpenAI_API_KEY"]
-
-def gpt_stream_completion(prompt, model=OPENAI_GPT3):
+def gpt_stream_completion(prompt: List[str]) -> str:
+    """
+    Get completion from GPT model using the new OpenAI API
+    Returns the full response text
+    """
     system_prompt, user_prompt = prompt[0], prompt[1]
-    messages = [
-        {"role": "system", "content": system_prompt}, 
-        {"role": "user", "content": user_prompt}, 
-        ]
-    
-    stream = openai.ChatCompletion.create(
-        model=model, 
-        messages=messages, 
-        temperature=0,
-        stream=True)
-    
-    completing_content = ""
-    for chunk in stream:
-        chunk_content = chunk["choices"][0].get("delta", {}).get("content")
-        if chunk_content: 
-            completing_content += chunk_content
-            st.markdown(completing_content)
-    
-    return
-
+    try:
+        # Initialize OpenAI client
+        client = OpenAI(api_key=get_openai_api_key())
+            
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        logger.error(f"Error in GPT completion: {str(e)}")
+        raise
 
 # --- Prompt Generation ---
 def generate_prompt(prod_info, num_of_reviews, review_texts, user_position, analysis_focus, input_question):
