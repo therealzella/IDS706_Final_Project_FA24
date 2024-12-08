@@ -13,12 +13,9 @@ from services.filereader import FileReader
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO, 
+    level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    handlers=[
-        logging.FileHandler("service.log"),
-        logging.StreamHandler()
-    ]
+    handlers=[logging.FileHandler("service.log"), logging.StreamHandler()],
 )
 logger = logging.getLogger("APIService")
 
