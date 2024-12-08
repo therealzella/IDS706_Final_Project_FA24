@@ -4,8 +4,7 @@ install:
 	pip install -r requirements.txt
 
 run:
-	export PYTHONPATH=${PYTHONPATH}:$(shell pwd)/.. && \
-	streamlit run app.py
+	uvicorn app:app --reload --host 0.0.0.0 --port 8000
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
