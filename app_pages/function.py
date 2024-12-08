@@ -3,8 +3,8 @@ import json
 import requests
 import streamlit as st
 
-from configs import (ANALYSIS_FOCUS, CONTENT_COL_CONFIG, OPENAI_CAP,
-                     OPENAI_GPT3, OPENAI_GPT4, REVIEW_NUM_CAP, USER_POSITION)
+from configs import (ANALYSIS_FOCUS, CONTENT_COL_CONFIG, OPENAI_GPT3,
+                     OPENAI_GPT4, REVIEW_NUM_CAP, USER_POSITION)
 from services.filereader import FileReader
 
 # API endpoint configuration
@@ -157,7 +157,7 @@ def show_function_page():
 
                     try:
                         # Prepare the file and data for the API request
-                        files = {"file": uploaded_file.getvalue()}
+                        # files = {"file": uploaded_file.getvalue()}
 
                         # Make API request
                         response = requests.post(

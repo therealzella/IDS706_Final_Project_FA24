@@ -13,7 +13,7 @@ class FileReader:
         """
         try:
             df = pd.read_excel(self.file)
-        except Exception as e:
+        except Exception:
             return False
 
         for column in USEFUL_COLUMNS:

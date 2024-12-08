@@ -1,10 +1,8 @@
-import json
 import logging
 import os
 from io import BytesIO
 from typing import Optional
 
-import pandas as pd
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel

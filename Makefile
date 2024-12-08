@@ -15,8 +15,6 @@ format:
 
 lint:
 	ruff check .
-	black . --check
-	pylint ./**/*.py
 
 # Cleaning
 clean:

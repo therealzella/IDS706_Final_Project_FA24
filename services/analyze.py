@@ -1,18 +1,17 @@
-import os
 from openai import OpenAI
-from anthropic import Anthropic, HUMAN_PROMPT, AI_PROMPT
-from configs import OPENAI_GPT3, OPENAI_GPT4
 
+from configs import OPENAI_GPT3
 
 try:
-    with open('.streamlit/secrets.toml', 'r') as f:
+    with open(".streamlit/secrets.toml", "r") as f:
         secrets = f.read()
-        api_key = secrets.split('=')[1].strip().strip('"')
+        api_key = secrets.split("=")[1].strip().strip('"')
 except Exception as e:
     raise Exception(f"Error loading OpenAI API key: {str(e)}")
 
 # Initialize OpenAI client with API key
 client = OpenAI(api_key=api_key)
+
 
 def gpt_stream_completion(prompt, model=OPENAI_GPT3):
     """
@@ -21,22 +20,19 @@ def gpt_stream_completion(prompt, model=OPENAI_GPT3):
     """
     system_prompt, user_prompt = prompt[0], prompt[1]
     messages = [
-        {"role": "system", "content": system_prompt}, 
-        {"role": "user", "content": user_prompt}, 
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
     ]
-    
+
     stream = client.chat.completions.create(
-        model=model,
-        messages=messages,
-        temperature=0,
-        stream=True
+        model=model, messages=messages, temperature=0, stream=True
     )
-    
+
     completing_content = ""
     for chunk in stream:
         if chunk.choices[0].delta.content is not None:
             completing_content += chunk.choices[0].delta.content
-    
+
     return completing_content
 
 

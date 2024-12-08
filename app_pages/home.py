@@ -1,9 +1,6 @@
-import random
-import time
-
 import streamlit as st
 
-from configs import ANALYSIS_FOCUS, CONTENT_COL_CONFIG, USER_POSITION
+from configs import CONTENT_COL_CONFIG
 
 # --------------------------------------------------------------------------------
 # ---- HOME PAGE -----------------------------------------------------------------
