@@ -35,7 +35,6 @@ class FileReader:
         columns=["date", "product", "comment"],
         num_of_reviews=100,
     ):
-
         df = self.extract_data()
 
         num_of_valid_reviews = len(df)

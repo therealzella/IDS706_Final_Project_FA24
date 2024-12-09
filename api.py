@@ -1,18 +1,19 @@
 import logging
-from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from typing import Optional
 from io import BytesIO
+from typing import Optional
+
+from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+
+from configs import OPENAI_GPT3
 
 # Import existing analysis modules
 from services.analyze import generate_prompt, gpt_stream_completion
 from services.filereader import FileReader
-from configs import OPENAI_GPT3
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger("APIService")
 
@@ -27,10 +28,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
+
 
 @app.post("/analyze")
 async def analyze_reviews(
@@ -51,12 +54,18 @@ async def analyze_reviews(
         except Exception as e:
             logger.error(f"Error reading file: {str(e)}")
             raise HTTPException(status_code=400, detail="Error reading uploaded file")
-        
+
         # Use existing FileReader to process file
         file_reader = FileReader(file_object)
         if not file_reader.check_file():
             logger.warning("Invalid file format detected")
-            raise HTTPException(status_code=400, detail="Invalid file format. Please upload an Excel file with the required columns.")
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "Invalid file format. Please upload an Excel file with the "
+                    "required columns."
+                ),
+            )
 
         # Get review texts
         try:
@@ -64,7 +73,7 @@ async def analyze_reviews(
         except Exception as e:
             logger.error(f"Error processing file content: {str(e)}")
             raise HTTPException(status_code=400, detail="Error processing file content")
-        
+
         # Generate analysis prompt
         prompt = generate_prompt(
             prod_info,
@@ -72,16 +81,16 @@ async def analyze_reviews(
             review_texts,
             user_position,
             analysis_focus,
-            input_question
+            input_question,
         )
-        
+
         # Execute analysis
         try:
             result = gpt_stream_completion(prompt, model=model)
         except Exception as e:
             logger.error(f"Error during analysis: {str(e)}")
             raise HTTPException(status_code=500, detail="Error during analysis process")
-        
+
         logger.info("Analysis completed successfully")
         return {"status": "success", "result": result}
 
@@ -91,11 +100,8 @@ async def analyze_reviews(
         logger.error(f"Error processing request: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.get("/metrics")
 async def get_metrics():
     """Provide basic service metrics"""
-    return {
-        "service": "review_analyzer",
-        "status": "running",
-        "version": "1.0.0"
-    }
+    return {"service": "review_analyzer", "status": "running", "version": "1.0.0"}
