@@ -71,3 +71,15 @@ streamlit run app.py
 3. Navigate through the application:
 - **Home Page**: Explore introductory content.
 - **Try Page**: Input product information, select focus areas, and analyze customer reviews.
+
+### AI Pair Programming Tool Usage
+
+The Review Analyzer relies heavily on AI tools for text analysis and insight generation:
+- **OpenAI GPT Models**:
+Used to process customer review data and generate human-like summaries, key findings, and recommendations.
+- **Anthropic Claude Models**:
+Provides additional natural language understanding capabilities for analyzing complex review datasets.
+- **Custom Prompt Generation**:
+Tailored prompts are generated dynamically to focus on specific user-defined aspects like Product Quality or User Experience.
+
+These tools are integrated seamlessly into the backend of the application, with results displayed in markdown format for clarity.
