@@ -9,7 +9,7 @@ install:
 
 # Testing and Code Quality
 test:
-	python -m pytest tests/ --cov=services
+	python -m pytest -v --cov=services --cov=api --cov-report=term-missing
 
 format:
 	black .

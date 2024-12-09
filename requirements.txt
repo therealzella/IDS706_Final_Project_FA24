@@ -1,26 +1,27 @@
 # Application Dependencies
-fastapi
-uvicorn
-streamlit
-streamlit_option_menu
-python-multipart
-pandas
-numpy
-openpyxl
+fastapi==0.95.0
+uvicorn==0.21.1
+streamlit==1.24.0
+streamlit_option_menu==0.3.2
+python-multipart==0.0.6
+pandas==1.5.3
+numpy==1.24.3
+openpyxl==3.1.2
 openai==0.28.0
-requests
-
-# Development Dependencies
-black
-isort
-ruff
-pylint
+requests==2.31.0
 
 # Testing Dependencies
-pytest
-pytest-cov
-locust
+pytest==7.3.1
+pytest-cov==4.0.0
+locust==2.15.1
+httpx==0.24.1
+
+# Development Dependencies
+black==23.3.0
+isort==5.12.0
+ruff==0.0.270
+pylint==2.17.4
 
 # Documentation
-mkdocs
-mkdocs-material
+mkdocs==1.4.3
+mkdocs-material==9.1.17
