@@ -42,10 +42,11 @@ docker-build:
 	docker build -t review-analyzer .
 
 docker-run:
-	docker run -p 8000:8000 -p 8501:8501 review-analyzer
+	docker run -p 8000:8000 -p 8501:8501 -v $(PWD)/.streamlit:/app/.streamlit review-analyzer
 
 docker-stop:
-	docker stop $$(docker ps -a -q)
+	docker ps -q | xargs -r docker stop
+	docker ps -aq | xargs -r docker rm
 
 docker-clean:
 	@echo "==> Stopping containers..."

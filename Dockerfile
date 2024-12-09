@@ -1,36 +1,31 @@
-# Build stage
-FROM python:3.9-slim as builder
+# Use Python slim image
+FROM python:3.9-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy requirements file
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first to leverage Docker cache
 COPY requirements.txt .
 
-# Install dependencies
-RUN pip install --user --no-cache-dir -r requirements.txt
+# Install Python packages
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all application code
+# Copy the rest of the application
 COPY . .
 
-# Production stage using distroless
-FROM gcr.io/distroless/python3-debian11
+# Copy startup script
+COPY start.sh .
+RUN chmod +x start.sh
 
-# Copy Python packages from builder stage
-COPY --from=builder /root/.local/lib/python3.9/site-packages /usr/lib/python3.9/site-packages
-
-# Copy application code
-COPY --from=builder /app /app
-
-# Set working directory
-WORKDIR /app
-
-# Create necessary directories and copy config
-COPY --from=builder /app/.streamlit /app/.streamlit
-
-# Expose ports for both services
+# Expose ports
 EXPOSE 8000 8501
 
-# Start both services using Python modules
-ENTRYPOINT ["python", "-m"]
-CMD ["streamlit", "run", "app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
+# Command to run both services
+CMD ["./start.sh"]

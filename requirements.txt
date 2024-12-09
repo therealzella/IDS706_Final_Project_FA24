@@ -7,7 +7,7 @@ python-multipart
 pandas
 numpy
 openpyxl
-openai
+openai==0.28.0
 requests
 
 # Development Dependencies
