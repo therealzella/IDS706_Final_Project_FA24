@@ -39,6 +39,104 @@ The Review Analyzer is an **AI-powered** application designed to analyze e-comme
 Below is the architecture diagram of the app in this repository
 ![Screenshot](Screenshot%202024-12-11%20at%2002.25.27.png)
 
+## Quantitative Assessment: Load Testing Report
+### Objective
+This project aims to evaluate the performance, reliability, and scalability of the target system under varying loads using two different load-testing approaches:
+
+- Python-Based Load Testing: Simulating 1,000 and 10,000 requests.
+- k6 Load Testing: Simulating up to 10,000 virtual users (VUs) in a staged test.
+
+### Methodology
+### Python-Based Load Testing
+
+- **Tool Used**: Python script with `ThreadPoolExecutor` for concurrency.
+- **Test Scenarios**:
+  - 1,000 Requests Test
+  - 10,000 Requests Test
+- **Metrics Collected**:
+  - Success Rate
+  - Total Time Elapsed
+  - Requests per Second
+  - Average Latency (Response Time)
+
+
+### `k6` Load Testing
+
+- **Tool Used**: `k6` load testing framework.
+- **Test Scenarios**:
+  - Load simulated across four stages:
+    1. Ramp-up to 1,000 VUs in 1 minute.
+    2. Sustained load with 5,000 VUs for 2 minutes.
+    3. High load with 10,000 VUs for 2 minutes.
+    4. Ramp-down to 0 VUs in 1 minute.
+- **Metrics Collected**:
+  - HTTP Timing Metrics (e.g., request duration, waiting, sending, receiving times)
+  - Data Transferred
+  - Virtual User Utilization
+  - Percentile-Based Latency Analysis (P90, P95)
+
+## Results
+
+### Python-Based Load Testing
+
+#### **1,000 Requests Test**
+- **Success Rate:** 100.0%
+- **Requests per Second:** 195.08
+- **Average Latency:** 0.05 seconds
+
+This test demonstrated strong reliability and efficiency, showing the system's ability to handle a moderate load with minimal latency.
+
+#### **10,000 Requests Test**
+- **Success Rate:** 99.2%
+- **Requests per Second:** 76.65
+- **Average Latency:** 0.05 seconds
+
+Under this heavier load, the system exhibited slight scalability limitations, with 82 failed requests and reduced throughput.
+
+### `k6` Load Testing
+
+#### **Key Metrics at Peak Load (10,000 VUs):**
+
+- **HTTP Request Duration**:
+  - **Average:** 174ms
+  - **Maximum:** 607ms
+  - **P95:** 389ms
+- **Success Rate:** 100% (all responses returned status code 200)
+- **Data Transferred**:
+  - **Received:** 1.1GB
+  - **Sent:** 102MB
+
+The system handled up to 10,000 VUs without any request failures. However, increased latency during high loads indicates areas for optimization.
+
+## Insights
+
+1. **Performance Consistency**
+   - Both tests demonstrated high success rates at moderate loads, confirming the system's reliability.
+   - Under higher loads, Python-based testing highlighted a few failures, while `k6` metrics revealed increased latencies.
+
+2. **Scalability**
+   - Python-based testing showed slight performance degradation with 10,000 requests, while `k6` testing demonstrated the system's ability to handle up to 10,000 VUs with increased response times.
+
+3. **Bottleneck Identification**
+   - Increased latency and reduced throughput under higher loads indicate potential resource constraints, particularly in handling concurrent requests.
+
+## Recommendations
+
+1. **Optimize Latency**:
+   - Address high-latency outliers by optimizing database queries, API response payloads, or server-side processing.
+   - Implement caching for frequently requested data.
+
+2. **Improve Scalability**:
+   - Use load balancing to distribute traffic across multiple servers.
+   - Scale horizontally by adding more instances during peak loads.
+
+3. **Enable TLS**:
+   - Integrate HTTPS to enhance security, as `k6` metrics showed no TLS handshaking.
+
+4. **Monitor Resource Usage**:
+   - Employ server-side monitoring tools to identify bottlenecks (CPU, memory, I/O) during high load tests.
+
+
 ## Installation
 
 ### Prerequisites
