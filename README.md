@@ -13,6 +13,9 @@ The following badges represent the status of the workflows in the `wl275_new` br
 - **Test Workflow**: [![Test Workflow](https://github.com/therealzella/IDS706_Final_Project_FA24/actions/workflows/test.yml/badge.svg?branch=wl275_new)](https://github.com/therealzella/IDS706_Final_Project_FA24/actions/workflows/test.yml?query=branch%3Dwl275_new)
 
 ## Project Video Demonstration Link
+```
+https://youtu.be/T3_KCBT2oAw
+```
 
 ## Features
 
