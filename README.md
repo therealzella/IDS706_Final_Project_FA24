@@ -3,6 +3,15 @@
 ## Description
 The Review Analyzer is an **AI-powered** application designed to analyze e-commerce product reviews. Built using Streamlit, the app integrates OpenAI's GPT and Anthropic's Claude models to provide comprehensive insights, summaries, and actionable recommendations for product improvements. The tool is tailored for professionals in roles such as Product R&D, Customer Service, and E-commerce Operations, helping them better understand customer feedback and make informed decisions.
 
+## CI/CD Pipeline Badges
+
+The following badges represent the status of the workflows in the `wl275_new` branch:
+
+- **Format Workflow**: [![Format Workflow](https://github.com/therealzella/IDS706_Final_Project_FA24/actions/workflows/format.yml/badge.svg?branch=wl275_new)](https://github.com/therealzella/IDS706_Final_Project_FA24/actions/workflows/format.yml?query=branch%3Dwl275_new)
+- **Install Workflow**: [![Install Workflow](https://github.com/therealzella/IDS706_Final_Project_FA24/actions/workflows/install.yml/badge.svg?branch=wl275_new)](https://github.com/therealzella/IDS706_Final_Project_FA24/actions/workflows/install.yml?query=branch%3Dwl275_new)
+- **Lint Workflow**: [![Lint Workflow](https://github.com/therealzella/IDS706_Final_Project_FA24/actions/workflows/lint.yml/badge.svg?branch=wl275_new)](https://github.com/therealzella/IDS706_Final_Project_FA24/actions/workflows/lint.yml?query=branch%3Dwl275_new)
+- **Test Workflow**: [![Test Workflow](https://github.com/therealzella/IDS706_Final_Project_FA24/actions/workflows/test.yml/badge.svg?branch=wl275_new)](https://github.com/therealzella/IDS706_Final_Project_FA24/actions/workflows/test.yml?query=branch%3Dwl275_new)
+
 ## Project Video Demonstration Link
 
 ## Features
