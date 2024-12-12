@@ -35,6 +35,10 @@ The Review Analyzer is an **AI-powered** application designed to analyze e-comme
 └── .gitignore               # Git ignore file
 ```
 
+## Architecture Diagram
+Below is the architecture diagram of the app in this repository
+![Screenshot](Screenshot%202024-12-11%20at%2002.25.27.png)
+
 ## Installation
 
 ### Prerequisites
