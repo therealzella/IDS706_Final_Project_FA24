@@ -1,7 +1,7 @@
 # IDS706 Fianl Project: Using Streamlit for E-commerce Review Analysis
 
 ## Description
-The Review Analyzer is an **AI-powered** application designed to analyze e-commerce product reviews. Built using Streamlit, the app integrates OpenAI's GPT and Anthropic's Claude models to provide comprehensive insights, summaries, and actionable recommendations for product improvements. The tool is tailored for professionals in roles such as Product R&D, Customer Service, and E-commerce Operations, helping them better understand customer feedback and make informed decisions.
+The Review Analyzer is an **AI-powered** application designed to analyze e-commerce product reviews. Built using Streamlit, the app integrates OpenAI's GPT and Anthropic's Claude models to provide comprehensive insights, summaries, and actionable recommendations for product improvements. The tool is tailored for professionals in roles such as Product R&D, Customer Service, and E-commerce Operations, helping them better understand customer feedback and make informed decisions. (For the most updated codes please consult the wl275_new branch!!)
 
 ## CI/CD Pipeline Badges
 
