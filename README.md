@@ -17,6 +17,14 @@ The following badges represent the status of the workflows in the `wl275_new` br
 https://youtu.be/T3_KCBT2oAw
 ```
 
+## AWS deployment
+1. Link to Access the APP: http://44.235.173.244:8501/
+2. To deploy to AWS using IaC, reference the ec2-template.yaml file for infrastructure details and use AWS CloudFormation to provision resources.
+
+## Docker Container
+1. The Dockerfile defines the containerization process by using a lightweight Python 3.9-slim image. It installs necessary dependencies, copies the application code and a startup script (start.sh), and exposes ports 8000 and 8501 to run the application.
+2. It is pushed to AWS Elastic Container Registry (ECR) for centralized storage. On the EC2 instance, the image is pulled from ECR and run using Docker to serve the application.
+
 ## Features
 
 - **AI-Powered Analysis**:
